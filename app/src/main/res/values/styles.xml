@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Begin Main Activity -->
+    <style name="main_theme" parent="android:Theme.Holo">
+
+        <!-- For the custom action bar background -->
+        <item name="android:actionBarStyle">@style/actionBarStyle</item>
+
+        <!-- For the resting Spinner style -->
+        <item name="android:spinnerItemStyle">
+            @style/spinnerItemStyle
+        </item>
+
+        <!-- For the overflow button -->
+        <item name="android:actionOverflowButtonStyle">@style/actionBarOverflow</item>
+
+        <!-- For each individual Spinner list item once clicked on -->
+        <item name="android:spinnerDropDownItemStyle">
+            @style/spinnerDropDownItemStyle
+        </item>
+
+    </style>
+    <!-- End Main Activity -->
+
+    <!-- Begin Popup :: Change Settings -->
+    <style name="popup_change_settings" parent="android:Theme.Holo.Dialog">
+
+        <!-- For the custom title background -->
+        <item name="android:windowTitleStyle">@style/dialog_title_style</item>
+
+    </style>
+    <!-- End Popup :: Change Settings -->
+
+    <!-- Begin Popup :: Change Defaults -->
+    <style name="popup_change_defaults" parent="android:Theme.Holo.Dialog">
+
+        <!-- For the custom title background -->
+        <item name="android:windowTitleStyle">@style/dialog_title_style</item>
+
+        <!-- For the resting Spinner style -->
+        <item name="android:spinnerItemStyle">
+            @style/spinnerItemStyle
+        </item>
+
+        <!-- For each individual Spinner list item once clicked on -->
+        <item name="android:spinnerDropDownItemStyle">
+            @style/spinnerDropDownItemStyle
+        </item>
+    </style>
+    <!-- End Popup :: Change Defaults -->
+
+    <!-- Begin Definitions -->
+    <style name="actionBarOverflow">
+        <item name="android:src">@drawable/ic_action_overflow</item>
+    </style>
+
+    <!-- ActionBar styles -->
+    <style name="actionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/action_bar_background</item>
+    </style>
+
+    <style name="spinnerItemStyle">
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="spinnerDropDownItemStyle">
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="dialog_title_style">
+        <item name="android:background">@android:color/holo_blue_dark</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+    <!-- End Definitions -->
+
+
+</resources>

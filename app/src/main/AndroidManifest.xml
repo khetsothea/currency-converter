@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.michael_cunningham.currencyconverter">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:theme="@style/main_theme" >
+
+        <!-- Main Activity -->
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Popup :: Change Defaults -->
+        <activity
+            android:name=".popups.PopupChangeDefaults"
+            android:label="@string/popup_change_defaults"
+            android:theme="@style/popup_change_defaults" >
+
+            <intent-filter>
+                <action android:name="ca.michael_cunningham.currencyconverter.POPUP_CHANGE_DEFAULTS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- Popup :: Change Settings -->
+        <activity
+            android:name=".popups.PopupChangeSettings"
+            android:label="@string/popup_change_settings"
+            android:theme="@style/popup_change_settings" >
+
+            <intent-filter>
+                <action android:name="ca.michael_cunningham.currencyconverter.POPUP_CHANGE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+    </application>
+
+</manifest>

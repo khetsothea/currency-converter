@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Activity Titles -->
+    <string name="app_name">Currency Converter</string>
+    <string name="popup_change_defaults">Change Defaults</string>
+    <string name="popup_change_settings">Change Settings</string>
+
+    <!-- Action Bar items -->
+    <string name="setting_change_defaults">Change Defaults</string>
+    <string name="setting_change_settings">Change Settings</string>
+    <string name="setting_refresh_data">Refresh Data</string>
+
+    <!-- Network error messages -->
+    <string name="notOnWiFi">Connect to a WiFi network</string>
+    <string name="notOnWiFiOrMobile">Connect to either WiFi or Mobile Data</string>
+
+    <!-- Global String Array for Currency Codes -->
+    <string-array name="currency_codes">
+        <item>USD</item>
+        <item>AUD</item>
+        <item>GBP</item>
+        <item>JPY</item>
+        <item>CAD</item>
+        <item>EUR</item>
+        <item>CHF</item>
+    </string-array>
+
+    <!-- Global String Array for JSON tags -->
+    <string-array name="json_tags">
+        <item>Rate</item>
+        <item>Date</item>
+        <item>Time</item>
+        <item>Ask</item>
+        <item>Bid</item>
+    </string-array>
+
+    <!-- Main Activity View Objects -->
+    <string name="btnConvert">Convert</string>
+    <string name="imgPoweredBy">Powered by Yahoo!</string>
+    <string name="lblLastRefreshed">Last Refreshed: </string>
+    <string name="lblCurrencySep">to</string>
+    <string name="lblRate">--.--</string>
+    <string name="lblLastRefreshedValue">Unknown</string>
+    <string name="lblAsk">Ask</string>
+    <string name="lblBid">Bid</string>
+    <string name="lblTime">Time</string>
+    <string name="lblDate">Date</string>
+    <string name="lblDetailsNumericPlaceholder">0.00</string>
+    <string name="lblDateValue">MM/DD/YYYY</string>
+    <string name="lblTimeValue">--:--</string>
+    <string name="sharedLoading">Loading&#8230;</string>
+    <string name="lblLastUpdatedSpacer"> - </string>
+    <string name="btnConvert_Description">Convert</string>
+
+    <!-- All Popups -->
+    <string name="btnSaveClose">Save and Close</string>
+    <string name="btnCancel">Cancel</string>
+
+    <!-- Popup :: Change Defaults -->
+    <string name="lblCurrencyFrom">Currency From</string>
+    <string name="lblCurrencyTo">Currency To</string>
+
+    <!-- Popup :: Change Settings -->
+    <string name="swtRefreshOnlyOnWifi">Refresh On Mobile Data</string>
+
+</resources>
