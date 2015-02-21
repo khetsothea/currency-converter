@@ -137,16 +137,7 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
 
                 setViewsToLatestInfo();
 
-            }/* else {
-
-                lblRate.setText(siState.getString("lblRateValue"));
-                lblDateValue.setText(siState.getString("lblDateValue"));
-                lblTimeValue.setText(siState.getString("lblTimeValue"));
-                lblAskValue.setText(siState.getString("lblAskValue"));
-                lblBidValue.setText(siState.getString("lblBidValue"));
-                lblLastRefreshedValue.setText(siState.getString("lblLastRefreshedValue"));
-
-            }*/
+            }
 
         } else {
 

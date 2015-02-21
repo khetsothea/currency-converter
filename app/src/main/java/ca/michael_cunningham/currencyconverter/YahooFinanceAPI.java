@@ -21,7 +21,7 @@ import ca.michael_cunningham.currencyconverter.tools.Cache;
  * YahooFinanceAPI
  * ------------------------
  *
- * A type of interface for the JSONParser inner-class used to get/get and manage the JSONParser
+ * A type of interface for the JSONParser inner-class used to get/set and manage the JSONParser
  *
  * @author  Michael Cunningham (www.michael-cunningham.ca)
  * @since   December 2nd, 2014
