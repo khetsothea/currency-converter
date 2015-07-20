@@ -25,12 +25,12 @@ import ca.michael_cunningham.currencyconverter.tools.Font;
  *
  * Main Activity Class for the Currency Converter Application
  *
- * @author  Michael Cunningham (www.michael-cunningham.ca)
+ * @author  Michael Cunningham (http://michael-cunningham.ca)
  * @since   December 2nd, 2014
  * @version v1.0
  */
-public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompleted {
-
+public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompleted
+{
     // ------------------------------------------------------------------- global class constants
     static final int POPUP_CHANGE_DEFAULTS_SEND_CODE = 0;
     static final int POPUP_CHANGE_SETTINGS_SEND_CODE = 1;
@@ -54,7 +54,6 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
     private Toast               tstToast;
 
     // ------------------------------------------------------------------- override methods
-
     /**
      * Constructs views, layout, objects and initializes variables and checks saves instance state
      * manually.
@@ -62,8 +61,8 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      * @param siState - the saved instance state bundle from onSaveInstanceState()
      */
     @Override
-    protected void onCreate(Bundle siState) {
-
+    protected void onCreate(Bundle siState)
+    {
         super.onCreate(siState);
         setContentView(R.layout.main);
 
@@ -102,12 +101,15 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
         aryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // wire up event handlers and set array adapters
-        btnConvert.setOnClickListener(new View.OnClickListener() {
+        btnConvert.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 onClickBtnConvert();
             }
         });
+
         spnCurrencyFrom.setAdapter(aryAdapter);
         spnCurrencyTo.setAdapter(aryAdapter);
 
@@ -120,8 +122,8 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
         OnTaskStarted   onTaskStarted   = this;
 
         // pull out the converter object from the saved instance state if it's there
-        if (siState != null) {
-
+        if (siState != null)
+        {
             apiInterface = siState.getParcelable("apiInterface");
             apiInterface.setListeners(onTaskCompleted, onTaskStarted);
             btnConvert.setEnabled(siState.getBoolean("btnConvertState"));
@@ -133,24 +135,25 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
             lblBidValue.setText(siState.getString("lblBidValue"));
             lblLastRefreshedValue.setText(siState.getString("lblLastRefreshedValue"));
 
-            if (apiInterface.isCacheValid()) {
-
+            if (apiInterface.isCacheValid())
+            {
                 setViewsToLatestInfo();
-
             }
-
-        } else {
-
+        }
+        else
+        {
             apiInterface = new YahooFinanceAPI(this);
             apiInterface.setListeners(onTaskCompleted, onTaskStarted);
             apiInterface.setLastRefreshed(shpPreferences.getString("lblLastRefreshed", getResources().getString(R.string.lblLastRefreshedValue)));
 
-            if (apiInterface.isCacheValid()) {
+            if (apiInterface.isCacheValid())
+            {
                 onClickBtnConvert();
-            } else {
+            }
+            else
+            {
                 onClickMnuRefresh();
             }
-
         }
     }
 
@@ -162,8 +165,8 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      * @param siState - the saved instance state bundle
      */
     @Override
-    protected void onSaveInstanceState(Bundle siState) {
-
+    protected void onSaveInstanceState(Bundle siState)
+    {
         super.onSaveInstanceState(siState);
         siState.putParcelable("apiInterface", apiInterface);
         siState.putString("lblRateValue", lblRate.getText().toString());
@@ -173,7 +176,6 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
         siState.putString("lblBidValue", lblBidValue.getText().toString());
         siState.putString("lblLastRefreshedValue", lblLastRefreshedValue.getText().toString());
         siState.putBoolean("btnConvertState", btnConvert.isEnabled());
-
     }
 
     /**
@@ -183,8 +185,8 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      * @return     - true/false call to superclass
      */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         this.mnuOptions = menu;
 
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -200,12 +202,12 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      * @return - true/false, call to superclass
      */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         int id = item.getItemId();
 
-        switch (id) {
-
+        switch (id)
+        {
             case (R.id.action_change_defaults) :
                 displayPopup(id);
             break;
@@ -230,38 +232,37 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      * @param i          - the intent passed back from the popup activity
      */
     @Override
-    public void onActivityResult(int returnCode, int resultCode, Intent i) {
-
-        if (resultCode == RESULT_OK) {
-
+    public void onActivityResult(int returnCode, int resultCode, Intent i)
+    {
+        if (resultCode == RESULT_OK)
+        {
             // construct editor to edit SharedPreferences object content
             SharedPreferences.Editor editor = shpPreferences.edit();
 
-            switch (returnCode) {
-
+            switch (returnCode)
+            {
                 // the user saved and closed the defaults popup
                 case POPUP_CHANGE_DEFAULTS_SEND_CODE :
-
                     editor.putInt("defaultCurrencyFromIndex", i.getIntExtra("spnCurrencyFromValue", 0));
                     editor.putInt("defaultCurrencyToIndex", i.getIntExtra("spnCurrencyToValue", 0));
 
                     spnCurrencyFrom.setSelection(i.getIntExtra("spnCurrencyFromValue", 0), true);
                     spnCurrencyTo.setSelection(i.getIntExtra("spnCurrencyToValue", 0), true);
 
-                    if (apiInterface.isCacheValid()) {
+                    if (apiInterface.isCacheValid())
+                    {
                         onClickBtnConvert();
-                    } else {
+                    }
+                    else
+                    {
                         onClickMnuRefresh();
                     }
-
                 break;
 
                 // the user saved and closed the settings popup
                 case POPUP_CHANGE_SETTINGS_SEND_CODE :
-
                     isMobileDataAllowed = i.getBooleanExtra("swtRefreshOnlyOnWiFi", true);
                     editor.putBoolean("swtRefreshOnlyOnWiFi", isMobileDataAllowed);
-
                 break;
             }
 
@@ -275,13 +276,12 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      * @param type - the type of task which has been started
      */
     @Override
-    public void onTaskStarted(byte type) {
-
-        if (type == YahooFinanceAPI.TASK_TYPE_REFRESH) {
-
+    public void onTaskStarted(byte type)
+    {
+        if (type == YahooFinanceAPI.TASK_TYPE_REFRESH)
+        {
             setRefreshActionButtonState(true);
             lblLastRefreshedValue.setText(getResources().getString(R.string.sharedLoading));
-
         }
 
         setViewsToLoading();
@@ -293,11 +293,11 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      * @param type - the type of task which has been started
      */
     @Override
-    public void onTaskCompleted(byte type) {
-
-        switch (type) {
+    public void onTaskCompleted(byte type)
+    {
+        switch (type)
+        {
             case (YahooFinanceAPI.TASK_TYPE_REFRESH) :
-
                 // construct editor to edit SharedPreferences object content
                 SharedPreferences.Editor editor = shpPreferences.edit();
 
@@ -306,7 +306,6 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
 
                 editor.putString("lblLastRefreshed", apiInterface.getLastRefreshed());
                 editor.apply();
-
             break;
 
             case (YahooFinanceAPI.TASK_TYPE_CONVERT) :
@@ -319,29 +318,24 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
     /**
      * Event handler called when the user clicks btnConvert
      */
-    protected void onClickBtnConvert() {
-
-        //objJSONParser = apiInterface.getJSONParser();
-
+    protected void onClickBtnConvert()
+    {
         apiInterface.getJSONParser().execute(
-                aryCurrencies[spnCurrencyFrom.getSelectedItemPosition()],
-                aryCurrencies[spnCurrencyTo.getSelectedItemPosition()]
+            aryCurrencies[spnCurrencyFrom.getSelectedItemPosition()],
+            aryCurrencies[spnCurrencyTo.getSelectedItemPosition()]
         );
-
     }
 
     /**
      * Event handler called when the user clicks the refresh button in the action bar
      */
-    protected void onClickMnuRefresh() {
-
-        if (isAllowedInternetAccess()) {
+    protected void onClickMnuRefresh()
+    {
+        if (isAllowedInternetAccess())
+        {
             apiInterface.invalidateCache();
-
-            //objJSONParser = ;
             apiInterface.getJSONParser().execute(aryCurrencies);
         }
-
     }
 
     // ------------------------------------------------------------------- private methods
@@ -350,30 +344,27 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      *
      * @param id - the id number corresponding to the menu item the user clicked
      */
-    private void displayPopup(int id) {
-
+    private void displayPopup(int id)
+    {
         Intent intent       = new Intent();
         String intentAction = getPackageName();
         int    activityCode = -1;
 
-        switch (id) {
+        switch (id)
+        {
             case (R.id.action_change_defaults) :
-
                 intentAction += ".POPUP_CHANGE_DEFAULTS";
                 activityCode  = POPUP_CHANGE_DEFAULTS_SEND_CODE;
 
                 intent.putExtra("defaultCurrencyFromIndex", shpPreferences.getInt("defaultCurrencyFromIndex", 0));
                 intent.putExtra("defaultCurrencyToIndex", shpPreferences.getInt("defaultCurrencyToIndex", 0));
-
             break;
 
             case (R.id.action_change_settings) :
-
                 intentAction += ".POPUP_CHANGE_SETTINGS";
                 activityCode  = POPUP_CHANGE_SETTINGS_SEND_CODE;
 
                 intent.putExtra("refreshOnlyOnWiFi", shpPreferences.getBoolean("swtRefreshOnlyOnWiFi", true));
-
             break;
         }
 
@@ -386,24 +377,23 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      *
      * @param refreshing - true/false if the icon should be loading
      */
-    private void setRefreshActionButtonState(boolean refreshing) {
-
-        if (mnuOptions != null) {
-
+    private void setRefreshActionButtonState(boolean refreshing)
+    {
+        if (mnuOptions != null)
+        {
             MenuItem refreshItem = mnuOptions.findItem(R.id.action_refresh_data);
 
-            if (refreshItem != null) {
-
-                if (refreshing) {
-                    Log.d("michael", "MainActivity: setRefreshActionButtonState to loading");
+            if (refreshItem != null)
+            {
+                if (refreshing)
+                {
                     refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
-                } else {
-                    refreshItem.setActionView(null);
-                    Log.d("michael", "MainActivity: setRefreshActionButtonState to original");
                 }
-
+                else
+                {
+                    refreshItem.setActionView(null);
+                }
             }
-
         }
     }
 
@@ -412,50 +402,55 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      *
      * @return - true/false if the application is allowed to attempt a connection
      */
-    private boolean isAllowedInternetAccess() {
-
+    private boolean isAllowedInternetAccess()
+    {
         NetworkInfo objNetworkMobile = objCManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         NetworkInfo objNetworkWiFi   = objCManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-        if (isMobileDataAllowed) {
-            if (objNetworkMobile.isConnected() || objNetworkWiFi.isConnected()) {
+        if (isMobileDataAllowed)
+        {
+            if (objNetworkMobile.isConnected() || objNetworkWiFi.isConnected())
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 showAToast(getResources().getString(R.string.notOnWiFiOrMobile));
             }
-
-        } else {
-
-            if (objNetworkWiFi.isConnected()) {
+        }
+        else
+        {
+            if (objNetworkWiFi.isConnected())
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 showAToast(getResources().getString(R.string.notOnWiFi));
             }
         }
 
         return false;
-
     }
 
     /**
      * Sets the views on the main activity to a loading state
      */
-    private void setViewsToLoading() {
-
+    private void setViewsToLoading()
+    {
         btnConvert.setEnabled(false);
         lblRate.setText(R.string.sharedLoading);
         lblDateValue.setText(R.string.sharedLoading);
         lblTimeValue.setText(R.string.sharedLoading);
         lblAskValue.setText(R.string.sharedLoading);
         lblBidValue.setText(R.string.sharedLoading);
-
     }
 
     /**
      * Sets the views to get the latest info from the API class
      */
-    private void setViewsToLatestInfo() {
-
+    private void setViewsToLatestInfo()
+    {
         btnConvert.setEnabled(true);
         lblRate.setText(apiInterface.getRate());
         lblDateValue.setText(apiInterface.getDate());
@@ -463,7 +458,6 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
         lblAskValue.setText(apiInterface.getAsk());
         lblBidValue.setText(apiInterface.getBid());
         lblLastRefreshedValue.setText(apiInterface.getLastRefreshed());
-
     }
 
     /**
@@ -471,22 +465,21 @@ public class MainActivity extends Activity implements OnTaskStarted, OnTaskCompl
      *
      * @param msg - the content of the message shown
      */
-    private void showAToast(String msg) {
-
+    private void showAToast(String msg)
+    {
         // if the isShown method does not return true, it throws an exception
-        try {
-
+        try
+        {
             // just set the text if it's being shown, don't restart it
             tstToast.getView().isShown();
             tstToast.setText(msg);
-
-        } catch (Exception e) {
-
+        }
+        catch (Exception e)
+        {
             // if it's invisible... make a new toast :)
             tstToast = Toast.makeText(this, msg, Toast.LENGTH_LONG);
         }
 
         tstToast.show();
-
     }
 }

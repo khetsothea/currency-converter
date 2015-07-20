@@ -23,12 +23,12 @@ import ca.michael_cunningham.currencyconverter.tools.Cache;
  *
  * A type of interface for the JSONParser inner-class used to get/set and manage the JSONParser
  *
- * @author  Michael Cunningham (www.michael-cunningham.ca)
+ * @author  Michael Cunningham (http://michael-cunningham.ca)
  * @since   December 2nd, 2014
  * @version v1.0
  */
-public class YahooFinanceAPI implements Parcelable {
-
+public class YahooFinanceAPI implements Parcelable
+{
     // ------------------------------------------------------------------- private class constants
     static final String URL_PREPEND       = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(";
     static final String URL_APPEND        = ")&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
@@ -53,19 +53,19 @@ public class YahooFinanceAPI implements Parcelable {
      *
      * @param ctxContext - the context from the activity which is using this class
      */
-    public YahooFinanceAPI(Context ctxContext) {
-
+    public YahooFinanceAPI(Context ctxContext)
+    {
         this.aryJsonTags      = ctxContext.getResources().getStringArray(R.array.json_tags);
         this.aryConvertedData = new String[aryJsonTags.length];
         this.cacheValid       = false;
 
-        if (Cache.fileExists(ctxContext, JSON_CACHE_FILE)) {
+        if (Cache.fileExists(ctxContext, JSON_CACHE_FILE))
+        {
             strRawJsonData = (String) Cache.loadFile(ctxContext, JSON_CACHE_FILE);
             cacheValid = true;
         }
 
         this.ctxContext = ctxContext;
-
     }
 
     // ------------------------------------------------------------------- get methods
@@ -75,7 +75,8 @@ public class YahooFinanceAPI implements Parcelable {
      *
      * @return - new JSONParser object
      */
-    public JSONParser getJSONParser() {
+    public JSONParser getJSONParser()
+    {
         return new JSONParser();
     }
 
@@ -84,7 +85,8 @@ public class YahooFinanceAPI implements Parcelable {
      *
      * @return - true/false if the cache is valid or not
      */
-    public boolean isCacheValid() {
+    public boolean isCacheValid()
+    {
         return cacheValid;
     }
 
@@ -93,7 +95,8 @@ public class YahooFinanceAPI implements Parcelable {
      *
      * @return - the rate value
      */
-    public String getRate() {
+    public String getRate()
+    {
         return aryConvertedData[0];
     }
 
@@ -102,7 +105,8 @@ public class YahooFinanceAPI implements Parcelable {
      *
      * @return - the date value
      */
-    public String getDate() {
+    public String getDate()
+    {
         return aryConvertedData[1];
     }
 
@@ -111,7 +115,8 @@ public class YahooFinanceAPI implements Parcelable {
      *
      * @return - the time value
      */
-    public String getTime() {
+    public String getTime()
+    {
         return aryConvertedData[2];
     }
 
@@ -120,7 +125,8 @@ public class YahooFinanceAPI implements Parcelable {
      *
      * @return - the ask value
      */
-    public String getAsk() {
+    public String getAsk()
+    {
         return aryConvertedData[3];
     }
 
@@ -129,7 +135,8 @@ public class YahooFinanceAPI implements Parcelable {
      *
      * @return - the bid value
      */
-    public String getBid() {
+    public String getBid()
+    {
         return aryConvertedData[4];
     }
 
@@ -138,7 +145,8 @@ public class YahooFinanceAPI implements Parcelable {
      *
      * @return - the last refreshed value
      */
-    public String getLastRefreshed() {
+    public String getLastRefreshed()
+    {
         return strLastRefreshed;
     }
 
@@ -147,7 +155,8 @@ public class YahooFinanceAPI implements Parcelable {
      *
      * @param strLastRefreshed - the saved string of the value
      */
-    public void setLastRefreshed(String strLastRefreshed) {
+    public void setLastRefreshed(String strLastRefreshed)
+    {
         this.strLastRefreshed = strLastRefreshed;
     }
 
@@ -156,7 +165,8 @@ public class YahooFinanceAPI implements Parcelable {
     /**
      * Set the cache validity to false, invalidating the cache
      */
-    public void invalidateCache() {
+    public void invalidateCache()
+    {
         this.cacheValid = false;
     }
 
@@ -166,7 +176,8 @@ public class YahooFinanceAPI implements Parcelable {
      * @param onTaskCompleted - the interface called when the task has been completed
      * @param onTaskStarted   - the interface called when the task has been started
      */
-    public void setListeners(OnTaskCompleted onTaskCompleted, OnTaskStarted onTaskStarted) {
+    public void setListeners(OnTaskCompleted onTaskCompleted, OnTaskStarted onTaskStarted)
+    {
         this.iListenerTaskCompleted = onTaskCompleted;
         this.iListenerTaskStarted = onTaskStarted;
     }
@@ -182,20 +193,19 @@ public class YahooFinanceAPI implements Parcelable {
      * @since   December 2nd, 2014
      * @version v1.0
      */
-    protected class JSONParser extends AsyncTask<String, Void, String[]> {
-
+    protected class JSONParser extends AsyncTask<String, Void, String[]>
+    {
         /**
          * Run before the task has started
          */
         @Override
-        protected void onPreExecute() {
-
+        protected void onPreExecute()
+        {
             if (!cacheValid) {
                 iListenerTaskStarted.onTaskStarted(TASK_TYPE_REFRESH);
             } else {
                 iListenerTaskStarted.onTaskStarted(TASK_TYPE_CONVERT);
             }
-
         }
 
         /**
@@ -205,28 +215,31 @@ public class YahooFinanceAPI implements Parcelable {
          * @return           - either null or a string array, depending on cache validity
          */
         @Override
-        protected String[] doInBackground(String... parameters) {
-
-            if (!cacheValid) {
-
-                try {
-
+        protected String[] doInBackground(String... parameters)
+        {
+            if (!cacheValid)
+            {
+                try
+                {
                     /* get all possibilities that the user could select out of the two spinners */
                     /* Yahoo's Finance API does not support more than 2 possible combinations of currencies */
                     int    parametersLength = parameters.length;
                     String strParameter     = "";
 
-                    for (int i = 0; i < parametersLength; i++) {
-                        for (int x = 0; x < parametersLength; x++) {
-
+                    for (int i = 0; i < parametersLength; i++)
+                    {
+                        for (int x = 0; x < parametersLength; x++)
+                        {
                             strParameter += "%22" + parameters[i] + parameters[x];
 
-                            if ((i == (parametersLength - 1)) && (x == (parametersLength - 1))) {
+                            if ((i == (parametersLength - 1)) && (x == (parametersLength - 1)))
+                            {
                                 strParameter += "%22";
-                            } else {
+                            }
+                            else
+                            {
                                 strParameter += "%22%2C%20";
                             }
-
                         }
                     }
 
@@ -238,35 +251,40 @@ public class YahooFinanceAPI implements Parcelable {
                     HttpResponse objHttpResponse = objHttpClient.execute(objHttpPost);
                                  strRawJsonData  = EntityUtils.toString(objHttpResponse.getEntity(), "UTF-8");
 
-                    try {
-
+                    try
+                    {
                         // save the created date :)
                         JSONObject allJsonData      = new JSONObject(strRawJsonData);
                         JSONObject childQuery       = allJsonData.getJSONObject("query");
                                    strLastRefreshed = childQuery.getString("created");
-
-                    } catch (JSONException e) {
+                    }
+                    catch (JSONException e)
+                    {
                         e.printStackTrace();
                     }
 
                     Cache.saveFile(strRawJsonData, ctxContext, JSON_CACHE_FILE);
-
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
+                }
+                catch (ClientProtocolException e)
+                {
                     e.printStackTrace();
                 }
-
-            } else {
-
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            else
+            {
                 String[] aryReturn = new String[aryJsonTags.length];
 
-                try {
-
+                try
+                {
                     /* after executing this task with a valid cache, we can simply feed in two currency strings */
                     String strParameter = "";
 
-                    for (String parameter : parameters) {
+                    for (String parameter : parameters)
+                    {
                         strParameter += parameter;
                     }
 
@@ -276,24 +294,26 @@ public class YahooFinanceAPI implements Parcelable {
                     JSONObject childResults = childQuery.getJSONObject("results");
                     JSONArray  childRate    = childResults.getJSONArray("rate");
 
-                    for (int i = 0; i < childRate.length(); i++) {
-
+                    for (int i = 0; i < childRate.length(); i++)
+                    {
                         JSONObject row = childRate.getJSONObject(i);
                         String     id  = row.getString("id");
 
-                        if (id.contentEquals(strParameter)) {
-
+                        if (id.contentEquals(strParameter))
+                        {
                             // stuff all the values from the json data into the return array
-                            for (int x = 0; x < aryJsonTags.length; x++) {
+                            for (int x = 0; x < aryJsonTags.length; x++)
+                            {
                                 aryReturn[x] = row.getString(aryJsonTags[x]);
                             }
-
                         }
                     }
 
                     return aryReturn;
 
-                } catch (JSONException e) {
+                }
+                catch (JSONException e)
+                {
                     e.printStackTrace();
                 }
             }
@@ -306,16 +326,17 @@ public class YahooFinanceAPI implements Parcelable {
          * @param aryReturn - the object returned from doInBackground()
          */
         @Override
-        protected void onPostExecute(String[] aryReturn) {
-
+        protected void onPostExecute(String[] aryReturn)
+        {
             aryConvertedData = aryReturn;
 
-            if (!cacheValid) {
-
+            if (!cacheValid)
+            {
                 cacheValid = true;
                 iListenerTaskCompleted.onTaskCompleted(TASK_TYPE_REFRESH);
-
-            } else {
+            }
+            else
+            {
                 iListenerTaskCompleted.onTaskCompleted(TASK_TYPE_CONVERT);
             }
         }
@@ -323,10 +344,13 @@ public class YahooFinanceAPI implements Parcelable {
 
     // ------------------------------------------------------------------- parcelable methods
     @Override
-    public int describeContents() {
+    public int describeContents()
+    {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel d, int flags) {}
+    public void writeToParcel(Parcel d, int flags)
+    {
+    }
 }

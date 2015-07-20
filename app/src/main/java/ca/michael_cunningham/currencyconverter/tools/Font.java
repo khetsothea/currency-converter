@@ -10,12 +10,12 @@ import android.graphics.Typeface;
  * An Android compatible, custom, abstract Java class used for getting a typeface file
  * in the assets folder.
  *
- * @author  Michael Cunningham (www.michael-cunningham.ca)
+ * @author  Michael Cunningham (http://michael-cunningham.ca)
  * @since   December 2nd, 2014
  * @version v1.0
  */
-public abstract class Font {
-
+public abstract class Font
+{
     /**
      * Gets a Typeface of the specified path in the assets folder
      *
@@ -23,7 +23,8 @@ public abstract class Font {
      * @param path - the path to the font file
      * @return     - a final typeface object to apply to a view
      */
-    public static Typeface getTypeFace(Context ctx, String path) {
+    public static Typeface getTypeFace(Context ctx, String path)
+    {
         return Typeface.createFromAsset(ctx.getAssets(), path);
     }
 }

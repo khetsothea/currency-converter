@@ -15,12 +15,12 @@ import ca.michael_cunningham.currencyconverter.R;
  *
  * Popup Activity with options to change default settings
  *
- * @author  Michael Cunningham (www.michael-cunningham.ca)
+ * @author  Michael Cunningham (http://michael-cunningham.ca)
  * @since   December 1st, 2014
  * @version v1.0
  */
-public class PopupChangeDefaults extends Activity {
-
+public class PopupChangeDefaults extends Activity
+{
     // ------------------------------------------------------------------- private global variables
     private Intent  objIntent;
     private Spinner spnCurrencyFrom;
@@ -34,8 +34,8 @@ public class PopupChangeDefaults extends Activity {
      * @param siState - the saved instance state bundle from onSaveInstanceState()
      */
     @Override
-    public void onCreate(Bundle siState) {
-
+    public void onCreate(Bundle siState)
+    {
         super.onCreate(siState);
         setContentView(R.layout.popup_change_defaults);
 
@@ -62,13 +62,17 @@ public class PopupChangeDefaults extends Activity {
         spnCurrencyFrom.setSelection(objIntent.getIntExtra("defaultCurrencyFromIndex", 0));
 
         // wire up event handlers
-        btnSaveClose.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        btnSaveClose.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
                 onClickBtnSaveClose();
             }
         });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        btnCancel.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
                 onClickBtnCancel();
             }
         });
@@ -79,24 +83,22 @@ public class PopupChangeDefaults extends Activity {
     /**
      * Event handler called when the user clicks btnClose
      */
-    protected void onClickBtnSaveClose() {
-
+    protected void onClickBtnSaveClose()
+    {
         // store the positions of the selections in the intent
         objIntent.putExtra("spnCurrencyFromValue", spnCurrencyFrom.getSelectedItemPosition());
         objIntent.putExtra("spnCurrencyToValue", spnCurrencyTo.getSelectedItemPosition());
 
         setResult(RESULT_OK, objIntent);
         finish();
-
     }
 
     /**
      * Event handler called when the user clicks btnCancel
      */
-    protected void onClickBtnCancel() {
-
+    protected void onClickBtnCancel()
+    {
         setResult(RESULT_CANCELED, objIntent);
         finish();
-
     }
 }

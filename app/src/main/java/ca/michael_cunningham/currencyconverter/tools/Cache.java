@@ -15,12 +15,12 @@ import java.io.ObjectOutputStream;
  * An Android compatible, custom, abstract Java class used for saving and loading files
  * in the application cache.
  *
- * @author  Michael Cunningham (www.michael-cunningham.ca)
+ * @author  Michael Cunningham (http://michael-cunningham.ca)
  * @since   December 2nd, 2014
  * @version v1.0
  */
-public abstract class Cache {
-
+public abstract class Cache
+{
     /**
      * Attempts to write a given object to the disk with the given file name
      *
@@ -29,12 +29,12 @@ public abstract class Cache {
      * @param path    - the path to the file, including the filename
      * @return result - boolean, if the saving process was successful or not (true/false)
      */
-    public static boolean saveFile(Object file, Context ctx, String path) {
-
+    public static boolean saveFile(Object file, Context ctx, String path)
+    {
         boolean result;
 
-        try {
-
+        try
+        {
             // setup streams
             FileOutputStream   outFileStream   = ctx.openFileOutput(path, Context.MODE_PRIVATE);
             ObjectOutputStream outObjectStream = new ObjectOutputStream(outFileStream);
@@ -47,8 +47,9 @@ public abstract class Cache {
             outObjectStream.close();
 
             result = true;
-
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             result = false;
             e.printStackTrace();
         }
@@ -63,13 +64,13 @@ public abstract class Cache {
      * @param path     - the path to the file, including the filename
      * @return rtnFile - a generic object which can be casted to different object types
      */
-    public static Object loadFile(Context ctx, String path) {
-
+    public static Object loadFile(Context ctx, String path)
+    {
         // declare dummy converter
         Object rtnFile = null;
 
-        try {
-
+        try
+        {
             // setup streams
             FileInputStream   inFileStream   = ctx.openFileInput(path);
             ObjectInputStream inObjectStream = new ObjectInputStream(inFileStream);
@@ -79,10 +80,13 @@ public abstract class Cache {
 
             // input done
             inObjectStream.close();
-
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        }
+        catch (ClassNotFoundException e)
+        {
             e.printStackTrace();
         }
 
@@ -96,10 +100,12 @@ public abstract class Cache {
      * @param path     - the path to the file, including the filename
      * @return boolean - if the file was deleted or not (true/false)
      */
-    public static boolean deleteFile(Context ctx, String path) {
-
-        if (fileExists(ctx, path)) {
-            if (ctx.deleteFile(path)) {
+    public static boolean deleteFile(Context ctx, String path)
+    {
+        if (fileExists(ctx, path))
+        {
+            if (ctx.deleteFile(path))
+            {
                 return true;
             }
         }
@@ -114,8 +120,8 @@ public abstract class Cache {
      * @param path     - the path to the file, including the filename
      * @return boolean - if the file exists or not (true/false)
      */
-    public static boolean fileExists(Context ctx, String path) {
-
+    public static boolean fileExists(Context ctx, String path)
+    {
         File file = ctx.getFileStreamPath(path);
 
         return file.exists();

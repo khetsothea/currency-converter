@@ -14,12 +14,12 @@ import ca.michael_cunningham.currencyconverter.R;
  *
  * Popup Activity with options to change settings
  *
- * @author  Michael Cunningham (www.michael-cunningham.ca)
+ * @author  Michael Cunningham (http://michael-cunningham.ca)
  * @since   December 1st, 2014
  * @version v1.0
  */
-public class PopupChangeSettings extends Activity {
-
+public class PopupChangeSettings extends Activity
+{
     // ------------------------------------------------------------------- private global variables
     private Intent objIntent;
     private Switch swtRefreshOnlyOnWiFi;
@@ -32,8 +32,8 @@ public class PopupChangeSettings extends Activity {
      * @param siState - the saved instance state bundle from onSaveInstanceState()
      */
     @Override
-    public void onCreate(Bundle siState) {
-
+    public void onCreate(Bundle siState)
+    {
         super.onCreate(siState);
         setContentView(R.layout.popup_change_settings);
 
@@ -49,13 +49,17 @@ public class PopupChangeSettings extends Activity {
         swtRefreshOnlyOnWiFi.setChecked(objIntent.getBooleanExtra("refreshOnlyOnWiFi", true));
 
         // wire up event handlers
-        btnSaveClose.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        btnSaveClose.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
                 onClickBtnSaveClose();
             }
         });
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        btnCancel.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
                 onClickBtnCancel();
             }
         });
@@ -66,21 +70,19 @@ public class PopupChangeSettings extends Activity {
     /**
      * Event handler called when user clicks btnSaveClose
      */
-    protected void onClickBtnSaveClose() {
-
+    protected void onClickBtnSaveClose()
+    {
         objIntent.putExtra("swtRefreshOnlyOnWiFi", swtRefreshOnlyOnWiFi.isChecked());
         setResult(RESULT_OK, objIntent);
         finish();
-
     }
 
     /**
      * Event handler called when user clicks btnCancel
      */
-    protected void onClickBtnCancel() {
-
+    protected void onClickBtnCancel()
+    {
         setResult(RESULT_CANCELED, objIntent);
         finish();
-
     }
 }
